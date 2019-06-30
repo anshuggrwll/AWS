@@ -1,0 +1,19 @@
+
+Link : https://www.youtube.com/watch?v=WBeAcJ1pXtg
+
+mkdir -p /var/mysql-certs/
+cd /var/mysql-certs/
+curl -O https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
+
+mysql -h mydb.cuv0n9zjhon1.us-east-1.rds.amazonaws.com -u root -p
+ALTER USER 'root'@'%' REQUIRE SSL;
+mysql -h mydb.cuv0n9zjhon1.us-east-1.rds.amazonaws.com --ssl-ca=/var/mysql-certs/rds-combined-ca-bundle.pem --ssl-mode=REQUIRED -u root -P 3306 -p  ****OR*****
+mysql -h mydb.cuv0n9zjhon1.us-east-1.rds.amazonaws.com --ssl-ca=/var/mysql-certs/rds-combined-ca-bundle.pem -u anshu -P 3306 -p
+
+
+SHOW DATABASES;
+SELECT mysql;
+SELECT User FROM mysql.user;
+CREATE USER 'anshu'@'%' IDENTIFIED BY 'anshu';
+GRANT ALL PRIVILEGES ON mysql.* TO 'anshu'@'%' WITH GRANT OPTION;
+ALTER USER 'anshu'@'%' REQUIRE SSL;
